@@ -3,8 +3,8 @@ package com.unimech.UVIOT
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
-import android.view.View
 import android.view.WindowManager
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
@@ -36,13 +36,20 @@ class MainActivity : AppCompatActivity() {
         mWebView.webViewClient = mGenericWebClient
 
     }
+    var pressedTwice = false
     override fun onBackPressed(){
         if(mWebView.canGoBack())
         {
             mWebView.goBack()
         }
         else{
-            super.onBackPressed()
+            if(pressedTwice){
+                finish()
+            }
+            this.pressedTwice = true
+            Toast.makeText(this, "Please click back again to exit", Toast.LENGTH_SHORT).show()
+
+            Handler().postDelayed(Runnable { pressedTwice = false }, 2000)
         }
     }
 
@@ -78,6 +85,4 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
-
 }
