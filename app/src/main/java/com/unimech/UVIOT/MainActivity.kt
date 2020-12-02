@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         mWebView=findViewById(R.id.webView)
         mWebView.loadUrl(Url)
-        //mWebView.loadUrl("http://192.168.4.1")
         val webSetting=mWebView.settings
         webSetting.javaScriptEnabled = true
         mWebView.webViewClient= WebViewClient()
@@ -38,19 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
     var pressedTwice = false
     override fun onBackPressed(){
-        if(mWebView.canGoBack())
-        {
-            mWebView.goBack()
-        }
-        else{
-            if(pressedTwice){
-                finish()
-            }
-            this.pressedTwice = true
-            Toast.makeText(this, "Please click back again to exit", Toast.LENGTH_SHORT).show()
 
-            Handler().postDelayed(Runnable { pressedTwice = false }, 2000)
-        }
     }
 
     class GenericWebClient : WebViewClient() {
